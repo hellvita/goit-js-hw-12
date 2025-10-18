@@ -1,0 +1,120 @@
+body {
+  background-color: #1d1c20;
+  font-family: 'Montserrat', sans-serif;
+  color: #332f42;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 36px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.form {
+  max-width: 371px;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+.form input {
+  color: inherit;
+  height: 40px;
+  padding: 8px 16px;
+  outline: none;
+  border: 2px solid #6a7987;
+  border-radius: 16px;
+  margin-right: 8px;
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form input::placeholder {
+  color: #808080;
+}
+
+.form input:hover {
+  border-color: #00c6b4;
+}
+
+.form input:focus {
+  border-color: #009cf8;
+}
+
+.form button {
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  height: 40px;
+  background: #2f5979;
+  border: none;
+  cursor: pointer;
+  transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form button:hover,
+.form button:focus {
+  background: #018ea9;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 0 64px;
+}
+
+.gallery-card {
+  height: 320px;
+  position: relative;
+  min-width: 320px;
+  flex-basis: calc((100% - 2 * 24px) / 3);
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-card:hover,
+.gallery-card:focus {
+  box-shadow: 0 0 8px 0 rgba(255, 236, 204, 0.9);
+  scale: 1.05;
+}
+
+.card-description {
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  background-color: rgba(241, 241, 230, 0.9);
+  color: inherit;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 4px 4px;
+}
+
+.description-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.description-title {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.33333;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.description-value {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+}
