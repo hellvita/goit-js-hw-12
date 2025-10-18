@@ -44,7 +44,7 @@ body {
   border-color: #009cf8;
 }
 
-.form button {
+button {
   color: #fff;
   border-radius: 8px;
   padding: 8px 16px;
@@ -55,8 +55,8 @@ body {
   transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.form button:hover,
-.form button:focus {
+button:hover,
+button:focus {
   background: #018ea9;
 }
 
@@ -117,4 +117,8 @@ body {
   font-size: 12px;
   line-height: 2;
   letter-spacing: 0.04em;
+}
+
+.load-btn.hidden {
+  display: none;
 }
