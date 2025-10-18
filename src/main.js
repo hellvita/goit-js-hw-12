@@ -49,6 +49,7 @@ async function handleImageSearch() {
 
     pagesAmount = Math.ceil(data.totalHits / PER_PAGE);
     if (pagesAmount > 1) showLoadBtn();
+    else endOfListMsg();
   } catch (error) {
     handleError(error);
   }
@@ -73,11 +74,10 @@ async function onLoadMore() {
     }
 
     render.createGallery(images);
+    console.log('pagesAmount: ', pagesAmount);
+    console.log('currentPage: ', currentPage);
     if (pagesAmount > currentPage) showLoadBtn();
-    else
-      toastMessage(
-        "We're sorry, but you've reached the end of search results."
-      );
+    else endOfListMsg();
   } catch (error) {
     handleError(error);
   }
@@ -96,4 +96,8 @@ function handleError(error) {
   render.hideLoader();
   toastMessage('Failed to fetch images. Please try again later.');
   console.log(error);
+}
+
+function endOfListMsg() {
+  toastMessage("We're sorry, but you've reached the end of search results.");
 }
