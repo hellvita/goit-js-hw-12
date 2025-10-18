@@ -2,6 +2,7 @@ import SimpleLightbox from 'simplelightbox';
 
 const loaderEl = document.querySelector('.loader');
 const galleryListEl = document.querySelector('.gallery');
+export const loadBtnEl = document.querySelector('.load-btn');
 
 const galleryLightbox = new SimpleLightbox('.gallery-link', {
   captionsData: 'alt',
@@ -14,7 +15,6 @@ export function createGallery(images) {
     .join('');
 
   galleryListEl.insertAdjacentHTML('beforeend', photoCardsMarkup);
-
   galleryLightbox.refresh();
 }
 
@@ -59,4 +59,31 @@ export function showLoader() {
 
 export function hideLoader() {
   loaderEl.classList.add('hidden');
+}
+
+export function showLoadBtn() {
+  loadBtnEl.classList.remove('hidden');
+}
+
+export function hideLoadBtn() {
+  loadBtnEl.classList.add('hidden');
+}
+
+export function bindLoadMoreHandler(callback) {
+  loadBtnEl.addEventListener('click', callback);
+}
+
+export function unbindLoadMoreHandler(callback) {
+  loadBtnEl.removeEventListener('click', callback);
+}
+
+export function scrollGallery() {
+  const cardEl = document.querySelector('.gallery-card');
+  const cardHeight = cardEl.getBoundingClientRect().height;
+  const scrollHeight = cardHeight * 2;
+
+  scrollBy({
+    top: scrollHeight,
+    behavior: 'smooth',
+  });
 }

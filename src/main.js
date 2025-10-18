@@ -4,7 +4,6 @@ import { toastMessage } from './js/settings';
 
 const formEl = document.querySelector('.form');
 const inputEl = formEl.elements['search-text'];
-const loadBtnEl = document.querySelector('.load-btn');
 
 let currentPage = 1;
 let pagesAmount = 0;
@@ -27,11 +26,10 @@ async function handleImageSearch() {
       return;
     }
 
+    currentPage = 1;
+    render.hideLoadBtn();
     render.clearGallery();
     render.showLoader();
-
-    currentPage = 1;
-    hideLoadBtn();
 
     const { data } = await getImagesByQuery(query, currentPage);
     const images = data.hits;
@@ -48,8 +46,12 @@ async function handleImageSearch() {
     render.createGallery(images);
 
     pagesAmount = Math.ceil(data.totalHits / PER_PAGE);
-    if (pagesAmount > 1) showLoadBtn();
-    else endOfListMsg();
+    if (pagesAmount > 1) {
+      render.showLoadBtn();
+      render.bindLoadMoreHandler(onLoadMore);
+    } else {
+      endOfListMsg();
+    }
   } catch (error) {
     handleError(error);
   }
@@ -58,7 +60,8 @@ async function handleImageSearch() {
 async function onLoadMore() {
   try {
     currentPage++;
-    hideLoadBtn();
+    render.hideLoadBtn();
+    render.unbindLoadMoreHandler(onLoadMore);
     render.showLoader();
 
     const { data } = await getImagesByQuery(query, currentPage);
@@ -74,22 +77,17 @@ async function onLoadMore() {
     }
 
     render.createGallery(images);
-    console.log('pagesAmount: ', pagesAmount);
-    console.log('currentPage: ', currentPage);
-    if (pagesAmount > currentPage) showLoadBtn();
-    else endOfListMsg();
+    render.scrollGallery();
+
+    if (pagesAmount > currentPage) {
+      render.showLoadBtn();
+      render.bindLoadMoreHandler(onLoadMore);
+    } else {
+      endOfListMsg();
+    }
   } catch (error) {
     handleError(error);
   }
-}
-
-function showLoadBtn() {
-  loadBtnEl.addEventListener('click', onLoadMore);
-  loadBtnEl.classList.remove('hidden');
-}
-function hideLoadBtn() {
-  loadBtnEl.removeEventListener('click', onLoadMore);
-  loadBtnEl.classList.add('hidden');
 }
 
 function handleError(error) {
